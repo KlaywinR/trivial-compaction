@@ -9,11 +9,9 @@ RAIZ = Path(__file__).resolve().parent
 DADOS = RAIZ / "dados"
 SAIDA = RAIZ / "saida"
 
-
 def cmd_exercicios(_args) -> int:
     print(exercicios_do_pdf())
     return 0
-
 
 def cmd_demo(_args) -> int:
     print(exercicios_do_pdf())
@@ -24,7 +22,7 @@ def cmd_demo(_args) -> int:
         print(formatar(analisar(nome, sequencia)))
         print()
 
-    # Ciclo completo com arquivo: sequência -> .gbin -> sequência
+    # sequência -> .gbin -> sequência
     SAIDA.mkdir(exist_ok=True)
     virus = ler_sequencia(DADOS / "virus.txt")
     destino = SAIDA / "virus.gbin"
@@ -44,7 +42,6 @@ def cmd_comprimir(args) -> int:
     print(f"{len(sequencia)} nucleotídeos -> {saida} ({saida.stat().st_size} bytes)")
     return 0
 
-
 def cmd_descomprimir(args) -> int:
     entrada = Path(args.entrada)
     saida = Path(args.saida) if args.saida else SAIDA / (entrada.stem + "_descomprimido.txt")
@@ -54,7 +51,6 @@ def cmd_descomprimir(args) -> int:
     saida.write_text(sequencia + "\n", encoding="utf-8")
     print(f"{len(sequencia)} nucleotídeos -> {saida}")
     return 0
-
 
 def montar_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="Compactação de sequências de DNA (2 bits por nucleotídeo).")

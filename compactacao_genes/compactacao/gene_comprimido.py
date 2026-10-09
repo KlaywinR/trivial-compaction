@@ -1,10 +1,8 @@
 """Classe GeneComprimido: guarda um gene usando apenas 2 bits por nucleotídeo.
 
-Ideia central (Kopec, cap. 1): a sequência inteira é armazenada em UM único
-número inteiro. Python permite inteiros de tamanho arbitrário, então o número
-cresce conforme o gene cresce.
+A sequência inteira é armazenada em UM único nnumero inteiro.
 
-Um bit "sentinela" (o número 1) é colocado na frente de tudo. Ele é
+Um bit sentinela é colocado na frente de tudo. Ele é
 necessário porque inteiros não guardam zeros à esquerda: sem o sentinela, o
 gene "A" (00) e o gene "AA" (0000) seriam ambos o número 0 e não seria
 possível saber o tamanho original.
@@ -18,8 +16,7 @@ from .codificacao import (
     NUCLEOTIDEO_PARA_BITS,
 )
 
-_MASCARA = (1 << BITS_POR_NUCLEOTIDEO) - 1  # 0b11: isola os 2 bits do "topo"
-
+_MASCARA = (1 << BITS_POR_NUCLEOTIDEO) - 1  # 03isola os 2 bits do "topo"
 
 class GeneComprimido:
 
@@ -27,10 +24,9 @@ class GeneComprimido:
         """Compacta a string `gene`."""
         self._bits = self._comprimir(gene)
 
-
     @staticmethod
     def _comprimir(gene: str) -> int:
-        bits = 1  # bit sentinela
+        bits = 1 
         for posicao, nucleotideo in enumerate(gene.upper()):
             codigo = NUCLEOTIDEO_PARA_BITS.get(nucleotideo)
             if codigo is None:
@@ -46,28 +42,27 @@ class GeneComprimido:
         total = len(self)
         letras = []
         for i in range(total):
-            # O primeiro nucleotídeo está nos bits mais altos (logo abaixo do sentinela)
+            # O primeiro nucleotídeo está nos bits mais altos 
             deslocamento = (total - 1 - i) * BITS_POR_NUCLEOTIDEO
             codigo = (self._bits >> deslocamento) & _MASCARA
             letras.append(BITS_PARA_NUCLEOTIDEO[codigo])
         return "".join(letras)
 
     def __len__(self) -> int:
-        """Quantidade de nucleotídeos."""
         return (self._bits.bit_length() - 1) // BITS_POR_NUCLEOTIDEO
 
     @property
     def tamanho_em_bits(self) -> int:
-        """Bits usados só pelos dados, sem bit de sentinela."""
+        """calcula quantos bits a sequência compactada ocupa"""
         return self._bits.bit_length() - 1
 
     @property
     def inteiro(self) -> int:
-        """O número inteiro que guarda tudo - inclui o bit sentinela."""
+        """número inteiro que guarda tudo - inclui o bit sentinela."""
         return self._bits
 
     def como_bits(self) -> str:
-        """Devolve os bits como texto, ex.: 'ATG' -> '001110'."""
+        """bits dos nucleotídeos - sem bit sentinela."""
         return format(self._bits, "b")[1:]
 
     def __str__(self) -> str:
@@ -83,7 +78,7 @@ class GeneComprimido:
         return hash(self._bits)
     
     def para_bytes(self) -> bytes:
-        """Serializa o inteiro em bytes. O sentinela preserva o tamanho."""
+        """Serializa o inteiro em bytes"""
         quantidade = (self._bits.bit_length() + 7) // 8
         return self._bits.to_bytes(quantidade, "big")
 

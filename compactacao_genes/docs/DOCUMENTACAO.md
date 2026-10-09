@@ -1,16 +1,16 @@
-# Documentação — Compactação de Genes (2 bits por nucleotídeo)
+# Compactação de Genes (2 bits por nucleotídeo)
 
-Implementação em Python da atividade **"Compactação Trivial / Economizar espaço"**, baseada em
-Kopec, *Problemas Clássicos de Ciência da Computação com Python* (p. 36).
+Implementação em Python de "Compactação Trivial e Economia de Espaço, baseada em
+Kopec, Problemas Clássicos de Ciência da Computação com Python (p. 36).
 
 ---
 
-## 1. A ideia em poucas linhas
+## 1. Acerca do Projeto
 
-- Um caractere de texto (string) costuma ocupar **8 bits**.
-- Um nucleotídeo só pode ser **A, C, G ou T** → apenas **4 valores possíveis**.
-- Com **2 bits** cabem exatamente 4 valores (2² = 4): `00`, `01`, `10`, `11`.
-- Logo, cada nucleotídeo pode ser guardado em 2 bits em vez de 8: **economia de 75%**.
+- Um caractere de texto (string) costuma ocupar 8 bits.
+- Um nucleotídeo só pode ser A, C, G ou T  → apenas 4 valores possíveis.
+- Com 2 bit* cabem exatamente 4 valores (2² = 4): `00`, `01`, `10`, `11`.
+- Logo, cada nucleotídeo pode ser guardado em 2 bits em vez de 8: economia de 75%.
 
 | Nucleotídeo | Código |
 |:-----------:|:------:|

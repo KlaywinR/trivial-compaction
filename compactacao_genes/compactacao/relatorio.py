@@ -11,7 +11,6 @@ from .codificacao import BITS_POR_CARACTERE
 from .gene_comprimido import GeneComprimido
 from .sequencias import contar_nucleotideos
 
-
 @dataclass(frozen=True)
 class ResultadoCompactacao:
     nome: str
@@ -54,7 +53,6 @@ def formatar(r: ResultadoCompactacao) -> str:
         f"Descompactação idêntica . {'SIM' if r.integridade_ok else 'NÃO'}",
     ])
 
-
 def _linha_exercicio(texto: str) -> str:
     alfabeto = len(set(texto))
     bits_simbolo = bits_necessarios(alfabeto)
@@ -64,7 +62,6 @@ def _linha_exercicio(texto: str) -> str:
         f"{texto} -> {original} bits como string ({len(texto)} x {BITS_POR_CARACTERE}); "
         f"{compactado} bits compactado ({len(texto)} x {bits_simbolo})"
     )
-
 
 def exercicios_do_pdf() -> str:
     atg = GeneComprimido("ATG")

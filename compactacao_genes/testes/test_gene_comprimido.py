@@ -35,7 +35,6 @@ class TestGeneComprimido(unittest.TestCase):
         self.assertEqual(gene.descomprimir(), "")
 
     def test_a_e_aa_sao_diferentes(self):
-        # Garante que o bit sentinela preserva o tamanho (zeros à esquerda)
         self.assertNotEqual(GeneComprimido("A"), GeneComprimido("AA"))
         self.assertEqual(len(GeneComprimido("AAAA")), 4)
 

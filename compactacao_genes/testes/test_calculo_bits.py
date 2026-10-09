@@ -15,7 +15,6 @@ from compactacao import (
 
 RAIZ = Path(__file__).resolve().parent.parent
 
-
 class TestCalculoBits(unittest.TestCase):
     def test_valores_representaveis(self):
         self.assertEqual(valores_representaveis(2), 4)
@@ -44,7 +43,6 @@ class TestCalculoBits(unittest.TestCase):
         self.assertEqual(economia_percentual(32, 8), 75.0)
         with self.assertRaises(ValueError):
             economia_percentual(0, 0)
-
 
 class TestSequencias(unittest.TestCase):
     def test_limpar_remove_cabecalho_e_espacos(self):
